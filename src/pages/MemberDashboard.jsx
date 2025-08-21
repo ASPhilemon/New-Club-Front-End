@@ -29,10 +29,11 @@ function LargeStatCard({ title, value }) {
 }
 
 export default function MemberDashboard() {
-  const [isMobile, setIsMobile] = useState(typeof window !== "undefined" ? window.innerWidth < 768 : true);
+  const [isMobile, setIsMobile] = useState(
+    typeof window !== "undefined" ? window.innerWidth < 768 : true
+  );
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const headerRef = useRef(null);
-  const topPinnedRef = useRef(null); // for mobile pinned area
   const [contentHeight, setContentHeight] = useState(sizes.minInnerHeight);
 
   useEffect(() => {
@@ -46,16 +47,14 @@ export default function MemberDashboard() {
 
   useEffect(() => {
     function computeHeights() {
-      const headerH = headerRef.current?.getBoundingClientRect().height || sizes.headerHeight;
-      const pinnedH = topPinnedRef.current?.getBoundingClientRect().height || 0;
+      const headerH =
+        headerRef.current?.getBoundingClientRect().height || sizes.headerHeight;
       const pagePad = spacing.pagePadding * 2;
-      if (isMobile) {
-        const h = Math.max(sizes.minInnerHeight, window.innerHeight - headerH - pinnedH - pagePad);
-        setContentHeight(h);
-      } else {
-        const h = Math.max(sizes.minInnerHeight, window.innerHeight - headerH - pagePad);
-        setContentHeight(h);
-      }
+      const h = Math.max(
+        sizes.minInnerHeight,
+        window.innerHeight - headerH - pagePad
+      );
+      setContentHeight(h);
     }
 
     computeHeights();
@@ -108,7 +107,7 @@ export default function MemberDashboard() {
   };
   const clubOverview = {
     title: "Club Overview",
-    rows:  [
+    rows: [
       ["Savings this year", "UGX 30M"],
       ["Earnings this year", "UGX 9M"],
       ["Loans this year", "UGX 25M"],
@@ -127,11 +126,24 @@ export default function MemberDashboard() {
   ];
 
   const toggleSidebar = () => setIsSidebarOpen((s) => !s);
-  const sidebarTransform = isSidebarOpen ? "translateX(0)" : "translateX(-100%)";
+  const sidebarTransform = isSidebarOpen
+    ? "translateX(0)"
+    : "translateX(-100%)";
 
   /* styles */
-  const pageBase = { minHeight: "100vh", backgroundColor: colors.lightGray, display: "flex", overflow: "hidden" };
-  const mainArea = { flex: 1, display: "flex", flexDirection: "column", height: "100vh", position: "relative" };
+  const pageBase = {
+    minHeight: "100vh",
+    backgroundColor: colors.lightGray,
+    display: "flex",
+    overflow: "hidden",
+  };
+  const mainArea = {
+    flex: 1,
+    display: "flex",
+    flexDirection: "column",
+    height: "100vh",
+    position: "relative",
+  };
   const largeCardBase = {
     backgroundColor: colors.white,
     borderRadius: 10,
@@ -141,7 +153,7 @@ export default function MemberDashboard() {
     boxSizing: "border-box",
   };
 
-  function DataGroup({ title, rows }) {
+  function DataGroup({ rows }) {
     return (
       <div style={{ marginBottom: isMobile ? 16 : 0 }}>
         {rows.map((r, i) => (
@@ -153,78 +165,186 @@ export default function MemberDashboard() {
 
   return (
     <div style={pageBase}>
-      <Sidebar isMobile={isMobile} isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} transform={sidebarTransform} dashboard="member" />
-      {isMobile && isSidebarOpen && <div onClick={() => setIsSidebarOpen(false)} style={{ position: "fixed", inset: 0, backgroundColor: "rgba(0,0,0,0.45)", zIndex: 999 }} />}
+      <Sidebar
+        isMobile={isMobile}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
+        transform={sidebarTransform}
+        dashboard="member"
+      />
+      {isMobile && isSidebarOpen && (
+        <div
+          onClick={() => setIsSidebarOpen(false)}
+          style={{
+            position: "fixed",
+            inset: 0,
+            backgroundColor: "rgba(0,0,0,0.45)",
+            zIndex: 999,
+          }}
+        />
+      )}
 
       <div style={mainArea}>
-        <Header isMobile={isMobile} onToggle={toggleSidebar} headerRef={headerRef} dashboard="member" />
+        <Header
+          isMobile={isMobile}
+          onToggle={toggleSidebar}
+          headerRef={headerRef}
+          dashboard="member"
+        />
 
         {isMobile ? (
-          <>
-            <div ref={topPinnedRef} style={{ padding: `0 ${spacing.pagePadding}px`, backgroundColor: colors.lightGray }}>
-              <div style={{ paddingTop: 10 }}>
-                <h1 style={{ fontSize: 20, color: colors.navy, margin: "6px 0", fontWeight: 800 }}>Welcome back, Mwebe</h1>
-                <p style={{ marginTop: 0, marginBottom: 10, color: "#344b5a" }}>Here's an overview of your account.</p>
+          <div
+            style={{
+              height: contentHeight,
+              overflowY: "auto",
+              WebkitOverflowScrolling: "touch",
+              padding: `12px ${spacing.pagePadding}px ${spacing.pagePadding}px`,
+            }}
+          >
+            {/* Greeting + Total Worth now inside scrollable area */}
+            <div style={{ paddingTop: 10 }}>
+              <h1
+                style={{
+                  fontSize: 20,
+                  color: colors.navy,
+                  margin: "6px 0",
+                  fontWeight: 800,
+                }}
+              >
+                Welcome back, Mwebe
+              </h1>
+              <p
+                style={{
+                  marginTop: 0,
+                  marginBottom: 10,
+                  color: "#344b5a",
+                }}
+              >
+                Here's an overview of your account.
+              </p>
 
-                <LargeStatCard title="Total Worth" value={totalWorth} />
-              </div>
+              <LargeStatCard title="Total Worth" value={totalWorth} />
             </div>
 
-            <div
-              style={{
-                height: contentHeight,
-                overflowY: "auto",
-                WebkitOverflowScrolling: "touch",
-                padding: `12px ${spacing.pagePadding}px ${spacing.pagePadding}px`,
-              }}
-            >
-              <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12 }}>
-                <div style={{ ...largeCardBase }}>
-                    <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{savingsOverview.title}</h3>
-                    <div style={{ height: 3, width: isMobile ? 56 : 60, backgroundColor: colors.gold, borderRadius: 2, margin: "10px 0 14px 0" }} />
-                  <DataGroup rows={savingsOverview.rows} />
-                </div>
+            <div style={{ display: "grid", gridTemplateColumns: "1fr", gap: 12, marginTop: 16 }}>
+              <div style={{ ...largeCardBase }}>
+                <h3
+                  style={{
+                    color: colors.navy,
+                    fontSize: 18,
+                    margin: 0,
+                  }}
+                >
+                  {savingsOverview.title}
+                </h3>
+                <div
+                  style={{
+                    height: 3,
+                    width: isMobile ? 56 : 60,
+                    backgroundColor: colors.gold,
+                    borderRadius: 2,
+                    margin: "10px 0 14px 0",
+                  }}
+                />
+                <DataGroup rows={savingsOverview.rows} />
+              </div>
 
-                <div style={largeCardBase}>
-                    <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{earningsOverview.title}</h3>
-                    <div style={{ height: 3, width: isMobile ? 56 : 60, backgroundColor: colors.gold, borderRadius: 2, margin: "10px 0 14px 0" }} />
-                  <DataGroup rows={earningsOverview.rows} />
-                </div>
+              <div style={largeCardBase}>
+                <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>
+                  {earningsOverview.title}
+                </h3>
+                <div
+                  style={{
+                    height: 3,
+                    width: isMobile ? 56 : 60,
+                    backgroundColor: colors.gold,
+                    borderRadius: 2,
+                    margin: "10px 0 14px 0",
+                  }}
+                />
+                <DataGroup rows={earningsOverview.rows} />
+              </div>
 
-                <div style={largeCardBase}>
-                    <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{loansOverview.title}</h3>
-                    <div style={{ height: 3, width: isMobile ? 56 : 60, backgroundColor: colors.gold, borderRadius: 2, margin: "10px 0 14px 0" }} />
-                  <DataGroup rows={loansOverview.rows} />
-                </div>
+              <div style={largeCardBase}>
+                <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>
+                  {loansOverview.title}
+                </h3>
+                <div
+                  style={{
+                    height: 3,
+                    width: isMobile ? 56 : 60,
+                    backgroundColor: colors.gold,
+                    borderRadius: 2,
+                    margin: "10px 0 14px 0",
+                  }}
+                />
+                <DataGroup rows={loansOverview.rows} />
+              </div>
 
-                <div style={largeCardBase}>
-                    <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{pointsOverview.title}</h3>
-                    <div style={{ height: 3, width: isMobile ? 56 : 60, backgroundColor: colors.gold, borderRadius: 2, margin: "10px 0 14px 0" }} />
-                  <DataGroup rows={pointsOverview.rows} />
-                </div>
+              <div style={largeCardBase}>
+                <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>
+                  {pointsOverview.title}
+                </h3>
+                <div
+                  style={{
+                    height: 3,
+                    width: isMobile ? 56 : 60,
+                    backgroundColor: colors.gold,
+                    borderRadius: 2,
+                    margin: "10px 0 14px 0",
+                  }}
+                />
+                <DataGroup rows={pointsOverview.rows} />
+              </div>
 
-                <div style={largeCardBase}>
-                    <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{clubOverview.title}</h3>
-                    <div style={{ height: 3, width: isMobile ? 56 : 60, backgroundColor: colors.gold, borderRadius: 2, margin: "10px 0 14px 0" }} />
-                  <DataGroup rows={clubOverview.rows} />
-                </div>
+              <div style={largeCardBase}>
+                <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>
+                  {clubOverview.title}
+                </h3>
+                <div
+                  style={{
+                    height: 3,
+                    width: isMobile ? 56 : 60,
+                    backgroundColor: colors.gold,
+                    borderRadius: 2,
+                    margin: "10px 0 14px 0",
+                  }}
+                />
+                <DataGroup rows={clubOverview.rows} />
               </div>
             </div>
-          </>
+          </div>
         ) : (
           <main style={{ padding: 20, flex: 1, overflow: "hidden" }}>
-            <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 20, height: "100%" }}>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "1fr 1.6fr",
+                gap: 20,
+                height: "100%",
+              }}
+            >
               <div style={{ display: "flex", flexDirection: "column", gap: spacing.gap }}>
                 <div>
-                  <h1 style={{ fontSize: 22, color: colors.navy, margin: 0, fontWeight: 800 }}>Welcome back, Mwebe</h1>
+                  <h1 style={{ fontSize: 22, color: colors.navy, margin: 0, fontWeight: 800 }}>
+                    Welcome back, Mwebe
+                  </h1>
                   <p style={{ marginTop: 6 }}>Here's an overview of your account.</p>
                 </div>
 
                 <LargeStatCard title="Total Worth" value={totalWorth} />
 
                 <div style={{ ...largeCardBase }}>
-                    <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{savingsOverview.title}</h3>
-                    <div style={{ height: 3, width: isMobile ? 56 : 60, backgroundColor: colors.gold, borderRadius: 2, margin: "10px 0 14px 0" }} />
+                  <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{savingsOverview.title}</h3>
+                  <div
+                    style={{
+                      height: 3,
+                      width: isMobile ? 56 : 60,
+                      backgroundColor: colors.gold,
+                      borderRadius: 2,
+                      margin: "10px 0 14px 0",
+                    }}
+                  />
                   <DataGroup rows={savingsOverview.rows} />
                 </div>
               </div>
@@ -233,13 +353,29 @@ export default function MemberDashboard() {
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, height: "100%" }}>
                   <div style={{ ...largeCardBase, overflow: "hidden" }}>
                     <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{earningsOverview.title}</h3>
-                    <div style={{ height: 3, width: isMobile ? 56 : 60, backgroundColor: colors.gold, borderRadius: 2, margin: "10px 0 14px 0" }} />
+                    <div
+                      style={{
+                        height: 3,
+                        width: isMobile ? 56 : 60,
+                        backgroundColor: colors.gold,
+                        borderRadius: 2,
+                        margin: "10px 0 14px 0",
+                      }}
+                    />
                     <DataGroup rows={earningsOverview.rows} />
                   </div>
 
                   <div style={{ ...largeCardBase, overflow: "hidden" }}>
                     <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{loansOverview.title}</h3>
-                    <div style={{ height: 3, width: isMobile ? 56 : 60, backgroundColor: colors.gold, borderRadius: 2, margin: "10px 0 14px 0" }} />
+                    <div
+                      style={{
+                        height: 3,
+                        width: isMobile ? 56 : 60,
+                        backgroundColor: colors.gold,
+                        borderRadius: 2,
+                        margin: "10px 0 14px 0",
+                      }}
+                    />
                     <DataGroup rows={loansOverview.rows} />
                   </div>
                 </div>
@@ -247,13 +383,29 @@ export default function MemberDashboard() {
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 16, height: "100%" }}>
                   <div style={{ ...largeCardBase, overflow: "hidden" }}>
                     <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{pointsOverview.title}</h3>
-                    <div style={{ height: 3, width: isMobile ? 56 : 60, backgroundColor: colors.gold, borderRadius: 2, margin: "10px 0 14px 0" }} />
+                    <div
+                      style={{
+                        height: 3,
+                        width: isMobile ? 56 : 60,
+                        backgroundColor: colors.gold,
+                        borderRadius: 2,
+                        margin: "10px 0 14px 0",
+                      }}
+                    />
                     <DataGroup rows={pointsOverview.rows} />
                   </div>
 
                   <div style={{ ...largeCardBase, overflow: "hidden" }}>
                     <h3 style={{ color: colors.navy, fontSize: 18, margin: 0 }}>{clubOverview.title}</h3>
-                    <div style={{ height: 3, width: isMobile ? 56 : 60, backgroundColor: colors.gold, borderRadius: 2, margin: "10px 0 14px 0" }} />
+                    <div
+                      style={{
+                        height: 3,
+                        width: isMobile ? 56 : 60,
+                        backgroundColor: colors.gold,
+                        borderRadius: 2,
+                        margin: "10px 0 14px 0",
+                      }}
+                    />
                     <DataGroup rows={clubOverview.rows} />
                   </div>
                 </div>
