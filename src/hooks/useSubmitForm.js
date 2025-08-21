@@ -20,6 +20,7 @@ export function useSubmitForm({url, method = "POST", onSuccess = ()=>{}}){
           body: formData
         })
         const data = await res.json()
+ console.log(url, data)
         if (data.status){
           onSuccess(data)
           setData(data)

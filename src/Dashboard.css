@@ -1,0 +1,193 @@
+/* ===== Global Colors ===== */
+:root {
+    --navy: #0a2342;
+    --gold: #d4af37;
+    --light-gray: #f5f5f5;
+    --white: #ffffff;
+    --gray-text: #777777;
+  }
+  
+  /* ===== Dashboard Layout ===== */
+  .dashboard {
+    min-height: 100vh;
+    background-color: var(--light-gray);
+    display: flex;
+    position: relative;
+  }
+  
+  /* ===== Sidebar Component ===== */
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100%;
+    background-color: var(--navy);
+    color: var(--white);
+    padding: 20px 0;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .sidebar.open {
+    transform: translateX(0);
+  }
+  .sidebar-profile {
+    border-radius: 50%;
+    margin-bottom: 10px;
+    border: 3px solid var(--gold);
+  }
+  .sidebar-name {
+    margin-bottom: 20px;
+    color: var(--gold);
+  }
+  .sidebar-nav {
+    width: 100%;
+    padding-left: 30px;
+  }
+  .sidebar-link {
+    padding: 10px 0;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .sidebar-btn-container {
+    padding: 10px 0;
+  }
+  .sidebar-btn {
+    background-color: var(--gold);
+    color: var(--navy);
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  /* ===== Hamburger Menu Component ===== */
+  .hamburger-menu {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 1001;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--navy);
+    cursor: pointer;
+  }
+  
+  /* ===== Overlay ===== */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+  
+  /* ===== Header Component ===== */
+  .header {
+    background-color: var(--gold);
+    color: var(--navy);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px 24px;
+    font-weight: bold;
+    font-size: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  
+  /* ===== StatCard Component ===== */
+  .stat-card-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+  }
+  .stat-card {
+    background-color: var(--navy);
+    padding: 16px;
+    border-radius: 10px;
+    min-width: 150px;
+  }
+  .stat-card-title {
+    font-size: 12px;
+    color: var(--gray-text);
+    margin-bottom: 6px;
+  }
+  .stat-card-value {
+    font-size: 22px;
+    font-weight: bold;
+    color: var(--gold);
+  }
+  
+  /* ===== DataRow Component ===== */
+  .data-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 6px 0;
+    border-bottom: 1px solid #eee;
+  }
+  .row-navy {
+    background-color: rgba(10, 35, 66, 0.1);
+  }
+  .row-gold {
+    background-color: rgba(212, 175, 55, 0.1);
+  }
+  .data-label {
+    color: var(--white);
+    font-size: 14px;
+  }
+  .data-value {
+    font-weight: bold;
+    font-size: 14px;
+  }
+  .value-gold {
+    color: var(--gold);
+  }
+  .value-navy {
+    color: var(--navy);
+  }
+  
+  /* ===== Large Cards ===== */
+  .large-card {
+    background-color: var(--white);
+    padding: 16px;
+    border-radius: 10px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.06);
+    border: 1px solid #e0e0e0;
+  }
+  .large-card-title {
+    color: var(--navy);
+    font-size: 18px;
+    margin-bottom: 6px;
+  }
+  .title-underline {
+    height: 2px;
+    background-color: var(--gold);
+    width: 50px;
+    margin-bottom: 15px;
+  }
+  .section-title {
+    color: var(--navy);
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  
+  /* ===== Scrollable Cards Container ===== */
+  .scrollable-cards {
+    overflow-y: auto;
+    max-height: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
