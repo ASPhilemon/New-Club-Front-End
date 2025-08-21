@@ -10,7 +10,7 @@ export const THEME = {
       lightGold: "rgba(240, 206, 94, 0.8)",
       lightGray: "rgba(245, 245, 245, 1)",
       white: "#f7f5f3ff",
-      softWhite: "rgba(255, 255, 255, 0.8)",
+      softWhite: "rgba(255, 255, 255, 0.5)",
       grayText: "hsla(0, 0%, 47%, 1.00)",
       divider: "rgba(238, 238, 238, 1)",
     },

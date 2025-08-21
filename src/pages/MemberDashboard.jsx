@@ -12,7 +12,7 @@ function LargeStatCard({ title, value }) {
   return (
     <div
       style={{
-        backgroundColor: colors.darkGold,
+        backgroundColor: colors.navy,
         color: colors.softWhite,
         borderRadius: 12,
         padding: 20,
@@ -22,8 +22,8 @@ function LargeStatCard({ title, value }) {
         gap: 8,
       }}
     >
-      <div style={{ fontSize: 17, color: colors.navy, fontWeight: 900 }}>{title}</div>
-      <div style={{ fontSize: 28, fontWeight: 800, color: colors.softWhite }}>{value}</div>
+      <div style={{ fontSize: 17, color: colors.softWhite, fontWeight: 900 }}>{title}</div>
+      <div style={{ fontSize: 28, fontWeight: 800, color: colors.darkGold }}>{value}</div>
     </div>
   );
 }
