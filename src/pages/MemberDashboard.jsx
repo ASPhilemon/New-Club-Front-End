@@ -12,8 +12,8 @@ function LargeStatCard({ title, value }) {
   return (
     <div
       style={{
-        backgroundColor: colors.navy,
-        color: colors.white,
+        backgroundColor: colors.darkGold,
+        color: colors.softWhite,
         borderRadius: 12,
         padding: 20,
         boxShadow: "0 6px 18px rgba(0,0,0,0.08)",
@@ -22,8 +22,8 @@ function LargeStatCard({ title, value }) {
         gap: 8,
       }}
     >
-      <div style={{ fontSize: 14, color: "rgba(255,255,255,0.85)", fontWeight: 600 }}>{title}</div>
-      <div style={{ fontSize: 28, fontWeight: 800, color: colors.gold }}>{value}</div>
+      <div style={{ fontSize: 17, color: colors.navy, fontWeight: 900 }}>{title}</div>
+      <div style={{ fontSize: 28, fontWeight: 800, color: colors.softWhite }}>{value}</div>
     </div>
   );
 }
@@ -70,7 +70,7 @@ export default function MemberDashboard() {
   // sample data (replace with real values)
   const totalWorth = "UGX 2,505,000";
   const savingsOverview = {
-    title: "Savings",
+    title: "Savings Overview",
     rows: [
       ["Savings this year", "UGX 1.5M"],
       ["Avg. monthly savings", "UGX 250K"],
@@ -80,7 +80,7 @@ export default function MemberDashboard() {
     ],
   };
   const earningsOverview = {
-    title: "Earnings",
+    title: "Earnings Overview",
     rows: [
       ["Total Earnings", "UGX 10M"],
       ["Earnings this year", "UGX 1M"],
@@ -89,7 +89,7 @@ export default function MemberDashboard() {
     ],
   };
   const loansOverview = {
-    title: "Loans",
+    title: "Loans Overview",
     rows: [
       ["Current Loans", "UGX 8M"],
       ["Interest paid", "UGX 0.8M"],
@@ -98,7 +98,7 @@ export default function MemberDashboard() {
     ],
   };
   const pointsOverview = {
-    title: "Points",
+    title: "Points Overview",
     rows: [
       ["Total Points", "3,200"],
       ["Points gained this year", "200"],
@@ -107,7 +107,7 @@ export default function MemberDashboard() {
     ],
   };
   const clubOverview = {
-    title: "Club Figures",
+    title: "Club Overview",
     rows:  [
       ["Savings this year", "UGX 30M"],
       ["Earnings this year", "UGX 9M"],
@@ -163,8 +163,8 @@ export default function MemberDashboard() {
           <>
             <div ref={topPinnedRef} style={{ padding: `0 ${spacing.pagePadding}px`, backgroundColor: colors.lightGray }}>
               <div style={{ paddingTop: 10 }}>
-                <h1 style={{ fontSize: 20, color: colors.navy, margin: "6px 0" }}>Welcome back, Mwebe</h1>
-                <p style={{ marginTop: 0, marginBottom: 10, color: "#344b5a" }}>Here’s your financial snapshot today.</p>
+                <h1 style={{ fontSize: 20, color: colors.navy, margin: "6px 0", fontWeight: 800 }}>Welcome back, Mwebe</h1>
+                <p style={{ marginTop: 0, marginBottom: 10, color: "#344b5a" }}>Here's an overview of your account.</p>
 
                 <LargeStatCard title="Total Worth" value={totalWorth} />
               </div>
@@ -216,8 +216,8 @@ export default function MemberDashboard() {
             <div style={{ display: "grid", gridTemplateColumns: "1fr 1.6fr", gap: 20, height: "100%" }}>
               <div style={{ display: "flex", flexDirection: "column", gap: spacing.gap }}>
                 <div>
-                  <h1 style={{ fontSize: 22, color: colors.navy, margin: 0 }}>Welcome back, Mwebe</h1>
-                  <p style={{ color: "#666", marginTop: 6 }}>Here’s your financial snapshot today.</p>
+                  <h1 style={{ fontSize: 22, color: colors.navy, margin: 0, fontWeight: 800 }}>Welcome back, Mwebe</h1>
+                  <p style={{ marginTop: 6 }}>Here's an overview of your account.</p>
                 </div>
 
                 <LargeStatCard title="Total Worth" value={totalWorth} />

@@ -13,7 +13,7 @@
     left: 0;
     height: 100%;
     width: 70vw;
-    background-color: #f8f9fa;
+    background-color: #0a4c14;
     z-index: 1040; /* High z-index to overlay other content */
     transition: transform 0.3s ease; /* Smooth slide-in effect */
 }
@@ -106,7 +106,7 @@
 
 /* Active link styling */
 .nav-link.active {
-    background-color: #e9ecef;
+    background-color: #838480;
     font-weight: bold;
 }
 
@@ -124,3 +124,7 @@
 }
 
 
+
+.sidebar-button:hover{
+  color: "white"
+}

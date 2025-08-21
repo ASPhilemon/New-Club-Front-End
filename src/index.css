@@ -118,3 +118,7 @@ border-radius: 5px;
 font-size: small;
 margin-right: 0.8rem;
 }
+
+.sidebar-button:hover{
+  color: #ffffff !important;
+}

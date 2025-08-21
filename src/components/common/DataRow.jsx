@@ -5,9 +5,9 @@ const { colors, mobileRowBg } = THEME;
 
 function DataRow({ label, value, index = 0, small = false }) {
   const navRow = index % 2 === 0;
-  const rowBg = navRow ? mobileRowBg.navy : mobileRowBg.gold;
-  const rightColor = navRow ? colors.gold : colors.navy;
-  const leftColor = navRow ? colors.white : colors.navy; // Changed for better contrast on gold
+  const rowBg = navRow ? mobileRowBg.navyLight : mobileRowBg.navyDark;
+  const rightColor = navRow ? colors.navyLight : colors.white;
+  const leftColor = navRow ? colors.navyLight : colors.white; // Changed for better contrast on navyDark
 
   return (
     <div

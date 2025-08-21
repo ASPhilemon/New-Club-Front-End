@@ -67,8 +67,8 @@ function NavLinkItem({ text, to = "#", onClick, isActive }) {
           padding: "10px 16px",
           cursor: "pointer",
           borderBottom: "1px solid rgba(255,255,255,0.06)",
-          color: isActive ? colors.navy : "rgba(255,255,255,0.95)",
-          backgroundColor: isActive ? colors.gold : "transparent",
+          color: isActive? colors.white: "rgba(196, 195, 195, 0.95)",
+          backgroundColor: isActive ? colors.darkGold : "transparent",
           fontSize: 14,
           fontWeight: isActive ? 800 : 600,
           margin: "0.7vh 0",
@@ -77,6 +77,7 @@ function NavLinkItem({ text, to = "#", onClick, isActive }) {
           alignItems: "center",
           width: "calc(100% - 28px)", // align with nav padding
           marginLeft: 28,
+          borderRadius: "20px 0 0 20px",
         }}
       >
         {text}
@@ -89,10 +90,13 @@ function NavLinkItem({ text, to = "#", onClick, isActive }) {
 function SidebarAction({ text, to, onClose }) {
   const inner = (
     <div
+    className="sidebar-button"
       style={{
         width: "100%",
-        backgroundColor: colors.gold,
+        backgroundColor: colors.darkGold,
         color: colors.navy,
+        borderColor:colors.softWhite,
+        borderWidth: "2px",
         padding: "10px 12px",
         borderRadius: 6,
         cursor: "pointer",
